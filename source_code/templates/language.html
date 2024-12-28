@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" vocab="http://schema.org/" typeof="CreativeWork">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ lang_name }}</title>
+</head>
+<body>
+    <h1 property="name">{{ lang_name }}</h1>
+    <ul>
+        {% for result in results["results"]["bindings"] %}
+        <li property="{{ result['property']['value'] }}">{{ result['value']['value'] }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
