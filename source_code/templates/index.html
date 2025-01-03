@@ -2,11 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Esolang Explorer</title>
+    <title>Esoteric Programming Languages</title>
 </head>
 <body>
-    <h1>Welcome to Esolang Explorer</h1>
-    <p>Discover esoteric programming languages, tools, and applications.</p>
-    <a href="/sparql">Run a SPARQL Query</a>
+    <h1>Esoteric Programming Languages</h1>
+    <ul>
+        {% for language in languages %}
+        <li><a href="/language/{{ language }}">{{ language }}</a></li>
+        {% endfor %}
+    </ul>
 </body>
 </html>
