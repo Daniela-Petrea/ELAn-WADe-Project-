@@ -14,6 +14,7 @@ def home():
     SELECT ?language WHERE {
         ?language rdf:type esolang:EsotericLanguage .
     }
+    ORDER BY ?language
     """
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
