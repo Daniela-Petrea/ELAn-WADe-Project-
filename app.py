@@ -7,9 +7,11 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from flask_cors import CORS
 from sklearn.metrics.pairwise import cosine_similarity
 from sentence_transformers import SentenceTransformer
+from flasgger import Swagger, swag_from
 
 app = Flask(__name__)
 CORS(app)
+swagger = Swagger(app)
 
 # Configure AllegroGraph SPARQL endpoint
 SPARQL_ENDPOINT = "http://172.178.135.123:10035/repositories/elan"
@@ -36,6 +38,28 @@ def home():
 
 
 @app.route("/languages/<path:lang_name>", methods=['GET'])
+@swag_from({
+    "parameters": [
+        {
+            "name": "lang_name",
+            "in": "path",
+            "type": "string",
+            "required": True,
+            "description": "The name of the language to fetch details about"
+        }
+    ],
+    "responses": {
+        200: {
+            "description": "Details of the specified language",
+            "examples": {
+                "application/json": {"property": "value"}
+            }
+        },
+        404: {
+            "description": "Language not found"
+        }
+    }
+})
 def language_details(lang_name):
     # Escape special characters with a backslash
     escaped_lang_name = escape_special_characters(lang_name)
@@ -96,6 +120,42 @@ def language_details(lang_name):
 
 
 @app.route('/languages/search', methods=['GET'])
+@swag_from({
+    "parameters": [
+        {
+            "name": "name",
+            "in": "query",
+            "type": "string",
+            "required": False,
+            "description": "Search term for the language name"
+        },
+        {
+            "name": "page",
+            "in": "query",
+            "type": "integer",
+            "required": False,
+            "description": "Page number for pagination"
+        },
+        {
+            "name": "limit",
+            "in": "query",
+            "type": "integer",
+            "required": False,
+            "description": "Number of results per page"
+        }
+    ],
+    "responses": {
+        200: {
+            "description": "Search results for languages",
+            "examples": {
+                "application/json": {
+                    "data": [{"languageName": "Brainfuck", "releasedYear": "1993"}],
+                    "pagination": {"page": 1, "limit": 12}
+                }
+            }
+        }
+    }
+})
 def search_languages():
     search_term = request.args.get('name', '')
     page = int(request.args.get('page', 1))
@@ -155,6 +215,28 @@ def search_languages():
 
 
 @app.route('/languages/years', methods=['GET'])
+@swag_from({
+    'tags': ['Languages'],
+    'summary': 'Get unique release years of esoteric languages',
+    'description': 'Fetch a list of unique years in which esoteric programming languages were released.',
+    'responses': {
+        200: {
+            'description': 'A list of unique release years',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'years': {
+                        'type': 'array',
+                        'items': {'type': 'string'}
+                    }
+                }
+            }
+        },
+        500: {
+            'description': 'Internal server error'
+        }
+    }
+})
 def get_unique_years():
     query = """
     PREFIX esolang: <http://example.org/ontology/esoteric_languages#>
@@ -174,6 +256,28 @@ def get_unique_years():
 
 
 @app.route('/languages/designers', methods=['GET'])
+@swag_from({
+    'tags': ['Languages'],
+    'summary': 'Get unique designers of esoteric languages',
+    'description': 'Fetch a list of unique designers of esoteric programming languages.',
+    'responses': {
+        200: {
+            'description': 'A list of unique designers',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'designers': {
+                        'type': 'array',
+                        'items': {'type': 'string'}
+                    }
+                }
+            }
+        },
+        500: {
+            'description': 'Internal server error'
+        }
+    }
+})
 def get_unique_designers():
     query = """
     PREFIX esolang: <http://example.org/ontology/esoteric_languages#>
@@ -194,6 +298,93 @@ def get_unique_designers():
 
 
 @app.route('/languages/details', methods=['GET'])
+@swag_from({
+    'tags': ['Languages'],
+    'summary': 'Get detailed information about esoteric languages',
+    'description': (
+        'Fetch detailed information about esoteric programming languages based on '
+        'optional filters like release year and designer. Supports pagination.'
+    ),
+    'parameters': [
+        {
+            'name': 'year',
+            'in': 'query',
+            'type': 'string',
+            'required': False,
+            'description': 'Filter by release year'
+        },
+        {
+            'name': 'designer',
+            'in': 'query',
+            'type': 'string',
+            'required': False,
+            'description': 'Filter by designer'
+        },
+        {
+            'name': 'page',
+            'in': 'query',
+            'type': 'integer',
+            'required': False,
+            'default': 1,
+            'description': 'Page number for pagination'
+        },
+        {
+            'name': 'limit',
+            'in': 'query',
+            'type': 'integer',
+            'required': False,
+            'default': 12,
+            'description': 'Number of results per page'
+        }
+    ],
+    'responses': {
+        200: {
+            'description': 'Detailed information about esoteric languages',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'data': {
+                        'type': 'array',
+                        'items': {
+                            'type': 'object',
+                            'properties': {
+                                'languageName': {'type': 'string'},
+                                'releasedYear': {'type': 'string'},
+                                'designer': {'type': 'string'},
+                                'computationalClasses': {
+                                    'type': 'array',
+                                    'items': {'type': 'string'}
+                                },
+                                'paradigms': {
+                                    'type': 'array',
+                                    'items': {'type': 'string'}
+                                },
+                                'usabilities': {
+                                    'type': 'array',
+                                    'items': {'type': 'string'}
+                                },
+                                'technicalCharacteristics': {
+                                    'type': 'array',
+                                    'items': {'type': 'string'}
+                                }
+                            }
+                        }
+                    },
+                    'pagination': {
+                        'type': 'object',
+                        'properties': {
+                            'page': {'type': 'integer'},
+                            'limit': {'type': 'integer'}
+                        }
+                    }
+                }
+            }
+        },
+        500: {
+            'description': 'Internal server error'
+        }
+    }
+})
 def get_language_details():
     year = request.args.get('year', None)
     designer = request.args.get('designer', None)
@@ -288,6 +479,28 @@ def load_entity_embeddings():
 
 
 @app.route('/compute_embeddings', methods=['GET'])
+@swag_from({
+    'tags': ['Embeddings'],
+    'summary': 'Compute or load entity embeddings',
+    'description': (
+        'Compute embeddings for all entities in the SPARQL dataset, or load '
+        'precomputed embeddings if they already exist.'
+    ),
+    'responses': {
+        200: {
+            'description': 'Embeddings computed or loaded successfully',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'message': {'type': 'string'}
+                }
+            }
+        },
+        500: {
+            'description': 'Internal server error'
+        }
+    }
+})
 def compute_embeddings():
     results = get_sparql_results()
     # Check if pkl file exists
@@ -298,6 +511,57 @@ def compute_embeddings():
 
 
 @app.route('/get_similar_languages', methods=['POST'])
+@swag_from({
+    'tags': ['Embeddings'],
+    'summary': 'Get similar esoteric languages',
+    'description': (
+        'Given the name of an esoteric language, compute and return the top '
+        'similar languages based on precomputed entity embeddings.'
+    ),
+    'parameters': [
+        {
+            'name': 'body',
+            'in': 'body',
+            'required': True,
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'given_language': {
+                        'type': 'string',
+                        'description': 'The name of the esoteric language to find similar languages for'
+                    }
+                }
+            }
+        }
+    ],
+    'responses': {
+        200: {
+            'description': 'A list of similar languages',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'given_language': {'type': 'string'},
+                    'similar_languages': {
+                        'type': 'array',
+                        'items': {
+                            'type': 'object',
+                            'properties': {
+                                'language': {'type': 'string'},
+                                'similarity_score': {'type': 'number'}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        400: {
+            'description': 'Bad request, missing or invalid input'
+        },
+        500: {
+            'description': 'Internal server error'
+        }
+    }
+})
 def get_similar_languages():
     data = request.get_json()
     given_language = data.get("given_language", None)
