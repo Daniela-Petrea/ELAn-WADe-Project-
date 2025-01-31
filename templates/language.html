@@ -1,60 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="schema: http://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema#">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ lang_name }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/language.css') }}">
 </head>
-<body>
-    <h1>{{ lang_name }}</h1>
-    <button id="back-button">Back to Home</button>
-    <div>
-    <!-- The table -->
-    <table>
-        <thead>
-            <tr>
-                <th>Property</th>
-                <th>Value</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for result in results %}
-            <tr>
-                <td>
-                    {% if result["property"]["link"] %}
-                        <a href="{{ result['property']['link'] }}">{{ result['property']['display'] }}</a>
-                    {% else %}
-                        {{ result["property"]["display"] }}
-                    {% endif %}
-                </td>
-                <td>
-                    {% if result["value"]["link"] %}
-                        <a href="{{ result['value']['link'] }}">{{ result['value']['display'] }}</a>
-                    {% else %}
-                        {{ result["value"]["display"] }}
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-    <!-- Carousel section  -->
-    <section id="similar-languages">
-        <h2>Similar Languages</h2>
+<body vocab="http://schema.org/" typeof="WebPage">
+
+    <!-- Language Details -->
+    <h1 property="schema:name">{{ lang_name }}</h1>
+    <button id="back-button" property="schema:relatedLink">Back to Home</button>
+
+    <div typeof="schema:SoftwareApplication">
+        <meta property="schema:name" content="{{ lang_name }}">
+        <meta property="schema:applicationCategory" content="ProgrammingLanguage">
+        
+        <!-- Property Table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td property="rdfs:label">
+                        {% if result["property"]["link"] %}
+                            <a href="{{ result['property']['link'] }}" property="schema:additionalProperty" typeof="PropertyValue">
+                                <span property="schema:name">{{ result['property']['display'] }}</span>
+                            </a>
+                        {% else %}
+                            <span property="schema:additionalProperty" typeof="PropertyValue">
+                                <span property="schema:name">{{ result["property"]["display"] }}</span>
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if result["value"]["link"] %}
+                            <a href="{{ result['value']['link'] }}" property="schema:value">{{ result['value']['display'] }}</a>
+                        {% else %}
+                            <span property="schema:value">{{ result["value"]["display"] }}</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Similar Languages Carousel -->
+    <section id="similar-languages" typeof="ItemList">
+        <h2 property="rdfs:label">Similar Languages</h2>
         <div class="carousel">
             <button id="prev-btn" class="arrow" aria-label="Previous">&#9664;</button>
             <div id="cards-container" class="cards-container">
-                <!-- Cards will be dynamically added here -->
+                {% for language in similar_languages %}
+                <div typeof="ListItem" property="itemListElement">
+                    <a href="{{ url_for('language_details', lang_name=language) }}" 
+                       property="schema:name" 
+                       resource="http://example.org/ontology/esoteric_languages#{{ language }}">
+                        {{ language }}
+                    </a>
+                </div>
+                {% endfor %}
             </div>
             <button id="next-btn" class="arrow" aria-label="Next">&#9654;</button>
         </div>
     </section>
+
     <script>
         window.similarLanguages = {{ similar_languages | tojson | safe }};
     </script>
     <!-- Link to external JavaScript -->
     <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+
 </body>
 </html>

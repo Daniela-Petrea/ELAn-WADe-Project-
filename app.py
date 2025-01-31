@@ -14,15 +14,16 @@ CORS(app)
 swagger = Swagger(app)
 
 # Configure AllegroGraph SPARQL endpoint
-SPARQL_ENDPOINT = "http://172.178.135.123:10035/repositories/elan"
-USERNAME = "admin"
-PASSWORD = "b4XsZwmj0x0uE720"
+SPARQL_ENDPOINT = "http://localhost:3030/esolang"
+# SPARQL_ENDPOINT = "http://172.178.135.123:10035/repositories/elan"
+# USERNAME = "admin"
+# PASSWORD = "b4XsZwmj0x0uE720"
 
 
 # Helper function to execute SPARQL queries
 def execute_sparql(query):
     sparql = SPARQLWrapper(SPARQL_ENDPOINT)
-    sparql.setCredentials(USERNAME, PASSWORD)
+    # sparql.setCredentials(USERNAME, PASSWORD)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     try:
@@ -441,7 +442,7 @@ def get_language_details():
 
 def get_sparql_results():
     sparql = SPARQLWrapper(SPARQL_ENDPOINT)
-    sparql.setCredentials(USERNAME, PASSWORD)
+    # sparql.setCredentials(USERNAME, PASSWORD)
     sparql.setQuery("""
         SELECT ?s ?p ?o WHERE {
             ?s ?p ?o.
