@@ -14,15 +14,15 @@ CORS(app)
 swagger = Swagger(app)
 
 # Configure AllegroGraph SPARQL endpoint
-SPARQL_ENDPOINT = "http://172.178.135.123:10035/repositories/elan"
+# SPARQL_ENDPOINT = "http://172.178.135.123:10035/repositories/elan"
+SPARQL_ENDPOINT = "http://localhost:3030/esolang/sparql"
 USERNAME = "admin"
 PASSWORD = "b4XsZwmj0x0uE720"
 
 
-# Helper function to execute SPARQL queries
 def execute_sparql(query):
     sparql = SPARQLWrapper(SPARQL_ENDPOINT)
-    sparql.setCredentials(USERNAME, PASSWORD)
+    # sparql.setCredentials(USERNAME, PASSWORD)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     try:
@@ -61,9 +61,7 @@ def home():
     }
 })
 def language_details(lang_name):
-    # Escape special characters with a backslash
     escaped_lang_name = escape_special_characters(lang_name)
-    # Construct the SPARQL query using the escaped language name
     query = f"""
     PREFIX esolang: <http://example.org/ontology/esoteric_languages#>
     PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -72,21 +70,25 @@ def language_details(lang_name):
         esolang:{escaped_lang_name} ?property ?value .
     }}
     """
-    # Execute the SPARQL query using the helper function
     results = execute_sparql(query)
+    print(results)
+
     if not results["results"]["bindings"]:
         return render_template("language_not_found.html", lang_name=lang_name), 404
+
     detailed_results = []
+
     for result in results["results"]["bindings"]:
         property_uri = result["property"]["value"]
         if property_uri.startswith("http://example.org/ontology/esoteric_languages#"):
             property_suffix = property_uri.split("#")[-1]
-            property_data = {"display": property_suffix, "link": f"/ontology/{property_suffix}"}
+            property_data = {"display": property_suffix, "link": None}
         elif property_uri.startswith("http://www.w3.org/"):
             property_suffix = property_uri.split("#")[-1]
-            property_data = {"display": property_suffix, "link": property_uri}
+            property_data = {"display": property_suffix, "link": None}
         else:
             property_data = {"display": property_uri, "link": None}
+
         value_uri = result["value"]["value"]
         if value_uri.startswith("http://example.org/ontology/esoteric_languages#"):
             value_suffix = value_uri.split("#")[-1]
@@ -94,18 +96,25 @@ def language_details(lang_name):
         elif value_uri.startswith("http://www.w3.org/"):
             value_suffix = value_uri.split("#")[-1]
             value_data = {"display": value_suffix, "link": value_uri}
+        elif value_uri.startswith("https://esolangs.org/wiki/"):
+            value_data = {"display": value_uri, "link": value_uri}
         else:
             value_data = {"display": value_uri, "link": None}
+
         detailed_results.append({"property": property_data, "value": value_data})
+    detailed_results.sort(key=lambda x: x["property"]["display"].lower())  # Case-insensitive sorting
+
+    # Obtain similar languages
     given_language = f'http://example.org/ontology/esoteric_languages#{lang_name}'
     data = {"given_language": given_language}
     headers = {'Content-Type': 'application/json'}
-    # Obtain similar languages
+
     r = requests.post(url="http://127.0.0.1:5000/get_similar_languages", json=data, headers=headers)
     if r.status_code == 200:
         similar_languages_response = r.json()
     else:
         similar_languages_response = {"similar_languages": []}
+
     similar_languages = similar_languages_response.get("similar_languages", [])
     similar_languages = [
         {
@@ -115,6 +124,7 @@ def language_details(lang_name):
         for lang in similar_languages
         if "#" in lang[0] and lang[0].split("#")[-1]  # Exclude invalid or incomplete URLs
     ]
+
     return render_template("language.html", results=detailed_results, lang_name=lang_name,
                            similar_languages=similar_languages)
 
@@ -302,8 +312,8 @@ def get_unique_designers():
     'tags': ['Languages'],
     'summary': 'Get detailed information about esoteric languages',
     'description': (
-        'Fetch detailed information about esoteric programming languages based on '
-        'optional filters like release year and designer. Supports pagination.'
+            'Fetch detailed information about esoteric programming languages based on '
+            'optional filters like release year and designer. Supports pagination.'
     ),
     'parameters': [
         {
@@ -439,6 +449,80 @@ def get_language_details():
     return jsonify(response)
 
 
+@app.route("/language/<path:lang_name>", methods=['GET'])
+@swag_from({
+    "parameters": [
+        {
+            "name": "lang_name",
+            "in": "path",
+            "type": "string",
+            "required": True,
+            "description": "The name of the language to fetch details about"
+        }
+    ],
+    "responses": {
+        200: {
+            "description": "Details of the specified language",
+            "examples": {
+                "application/json": {"property": "value"}
+            }
+        },
+        404: {
+            "description": "Language not found"
+        }
+    }
+})
+def language_details_specific_language(lang_name):
+    escaped_lang_name = escape_special_characters(lang_name)
+    query = f"""
+    PREFIX esolang: <http://example.org/ontology/esoteric_languages#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+    SELECT 
+      (STRAFTER(STR(?language), "http://example.org/ontology/esoteric_languages#") AS ?languageName)
+      ?releasedYear
+      ?designer
+      (GROUP_CONCAT(DISTINCT STRAFTER(STR(?computationalClass), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?computationalClasses)
+      (GROUP_CONCAT(DISTINCT STRAFTER(STR(?paradigm), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?paradigms)
+      (GROUP_CONCAT(DISTINCT STRAFTER(STR(?usability), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?usabilities)
+      (GROUP_CONCAT(DISTINCT STRAFTER(STR(?technicalCharacteristic), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?technicalCharacteristics)
+    WHERE {{
+      BIND(esolang:{escaped_lang_name} AS ?language)
+
+      ?language rdf:type esolang:EsotericLanguage .
+
+      OPTIONAL {{ ?language esolang:releasedYear ?releasedYear . }}
+      OPTIONAL {{ ?language esolang:designer ?designer . }}
+      OPTIONAL {{ ?language esolang:hasComputationalClass ?computationalClass . }}
+      OPTIONAL {{ ?language esolang:hasParadigm ?paradigm . }}
+      OPTIONAL {{ ?language esolang:hasUsability ?usability . }}
+      OPTIONAL {{ ?language esolang:hasTechnicalCharacteristic ?technicalCharacteristic . }}
+    }}
+    GROUP BY ?language ?releasedYear ?designer
+    """
+
+    results = execute_sparql(query)
+    print(results)
+
+    if "error" in results:
+        return jsonify({"error": results["error"]}), 500
+
+    response_data = []
+    for result in results["results"]["bindings"]:
+        response_data.append({
+            "languageName": result["languageName"]["value"],
+            "releasedYear": result.get("releasedYear", {}).get("value"),
+            "designer": result.get("designer", {}).get("value"),
+            "computationalClasses": result.get("computationalClasses", {}).get("value", "").split(", "),
+            "paradigms": result.get("paradigms", {}).get("value", "").split(", "),
+            "usabilities": result.get("usabilities", {}).get("value", "").split(", "),
+            "technicalCharacteristics": result.get("technicalCharacteristics", {}).get("value", "").split(", "),
+        })
+
+    response = {"data": response_data}
+    return jsonify(response)
+
+
 def get_sparql_results():
     sparql = SPARQLWrapper(SPARQL_ENDPOINT)
     sparql.setCredentials(USERNAME, PASSWORD)
@@ -483,8 +567,8 @@ def load_entity_embeddings():
     'tags': ['Embeddings'],
     'summary': 'Compute or load entity embeddings',
     'description': (
-        'Compute embeddings for all entities in the SPARQL dataset, or load '
-        'precomputed embeddings if they already exist.'
+            'Compute embeddings for all entities in the SPARQL dataset, or load '
+            'precomputed embeddings if they already exist.'
     ),
     'responses': {
         200: {
@@ -503,7 +587,6 @@ def load_entity_embeddings():
 })
 def compute_embeddings():
     results = get_sparql_results()
-    # Check if pkl file exists
     embeddings = load_entity_embeddings()
     if embeddings is None:
         embeddings = calculate_entity_embeddings(results)
@@ -515,8 +598,8 @@ def compute_embeddings():
     'tags': ['Embeddings'],
     'summary': 'Get similar esoteric languages',
     'description': (
-        'Given the name of an esoteric language, compute and return the top '
-        'similar languages based on precomputed entity embeddings.'
+            'Given the name of an esoteric language, compute and return the top '
+            'similar languages based on precomputed entity embeddings.'
     ),
     'parameters': [
         {
@@ -594,6 +677,109 @@ def escape_special_characters(name):
     for char in special_characters:
         name = name.replace(char, f"\\{char}")
     return name
+
+
+@app.route('/compare_languages', methods=['POST'])
+@swag_from({
+    'tags': ['Comparison'],
+    'summary': 'Compare a given language with a similar language',
+    'description': 'Fetch detailed information for both the given language and one of its similar languages, then compare them.',
+    'parameters': [
+        {
+            'name': 'given_language',
+            'in': 'body',
+            'required': True,
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'given_language': {'type': 'string'}
+                }
+            }
+        },
+        {
+            'name': 'similar_language',
+            'in': 'body',
+            'required': True,
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'similar_language': {'type': 'string'}
+                }
+            }
+        }
+    ],
+    'responses': {
+        200: {
+            'description': 'Comparison results between the given language and the similar language',
+            'schema': {
+                'type': 'object',
+                'properties': {
+                    'comparison': {
+                        'type': 'array',
+                        'items': {
+                            'type': 'object',
+                            'properties': {
+                                'property': {'type': 'string'},
+                                'given_language_value': {'type': 'string'},
+                                'similar_language_value': {'type': 'string'},
+                                'similarity': {'type': 'string'}
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        400: {'description': 'Bad request'},
+        500: {'description': 'Internal server error'}
+    }
+})
+def compare_languages():
+    data = request.get_json()
+    print(data)
+
+    given_language = data.get('given_language')
+    similar_language = data.get('similar_language')
+
+    if not given_language or not similar_language:
+        return jsonify({"error": "Both 'given_language' and 'similar_language' must be provided!"}), 400
+
+    print(given_language)
+    print(similar_language)
+    given_lang_response = language_details_specific_language(given_language)
+    similar_lang_response = language_details_specific_language(similar_language)
+    given_lang_details = given_lang_response.get_json()
+    similar_lang_details = similar_lang_response.get_json()
+    print(given_lang_details)
+    print(similar_lang_details)
+    if "data" not in given_lang_details or "data" not in similar_lang_details:
+        return jsonify({"error": "Failed to retrieve language details"}), 500
+
+    given_lang_data = given_lang_details["data"][0] if given_lang_details["data"] else {}
+    similar_lang_data = similar_lang_details["data"][0] if similar_lang_details["data"] else {}
+
+    # Extract key details for comparison
+    properties = [
+        'releasedYear', 'designer', 'computationalClasses', 'paradigms',
+        'usabilities', 'technicalCharacteristics'
+    ]
+    comparison = []
+    for prop in properties:
+        given_value = given_lang_data.get(prop, 'Not Available')
+        similar_value = similar_lang_data.get(prop, 'Not Available')
+        if given_value is None or given_value == '' or (isinstance(given_value, list) and not given_value[0]):
+            given_value = 'N/A'
+        if similar_value is None or similar_value == '' or (isinstance(similar_value, list) and not similar_value[0]):
+            similar_value = 'N/A'
+        # Determine similarity based on values
+        similarity = 'Similar' if given_value == similar_value else 'Different'
+        comparison.append({
+            'property': prop,
+            'given_language_value': given_value,
+            'similar_language_value': similar_value,
+            'similarity': similarity
+        })
+
+    return jsonify({'comparison': comparison})
 
 
 if __name__ == '__main__':

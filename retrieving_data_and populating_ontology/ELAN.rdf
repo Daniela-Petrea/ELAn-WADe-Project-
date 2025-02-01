@@ -103,7 +103,12 @@
         <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
     </owl:DatatypeProperty>
     
+    <!-- http://example.org/ontology/esoteric_languages#url -->
 
+    <owl:DatatypeProperty rdf:about="http://example.org/ontology/esoteric_languages#url">
+        <rdfs:domain rdf:resource="http://example.org/ontology/esoteric_languages#EsotericLanguage"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
 
     <!-- 
     ///////////////////////////////////////////////////////////////////////////////////////

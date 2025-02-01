@@ -29,6 +29,7 @@ else:
             text_elem = last_revision.find('mw:text', namespace)
             if text_elem is not None and text_elem.text:
                 content = text_elem.text
+                print(content)
                 categories = re.findall(r'\[\[Category:(.*?)]]', content)
                 if categories:
                     language_categories[title] = categories
