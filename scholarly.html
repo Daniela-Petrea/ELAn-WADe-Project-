@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Your Name">
+    <meta name="description" content="Technical Report on the Web Application for Esoteric Languages">
+    <title>Scholarly Technical Report</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Technical Report: Web Application for Esoteric Languages</h1>
+        <p>by <em>Petrea Daniela and Puscasu Bogdan</em></p>
+    </header>
+
+    <section id="introduction">
+        <h2>1. Introduction</h2>
+    
+        <p>Esoteric programming languages, often referred to as "esolangs," are programming languages created as a form of artistic expression, or as an intellectual challenge, rather than for practical software development. These languages usually prioritize novelty, complexity, or humor over ease of use, and they often explore unconventional computational paradigms. Esolangs, with their diverse range of designs, offer insights into the creativity and theoretical aspects of computation.</p>
+    
+        <p>This project involves the development of a web application dedicated to providing detailed information on esoteric programming languages. The application allows users to explore various esolangs, search and filter them based on multiple attributes, and access detailed descriptions that encompass not only the language itself but also its computational model, paradigm, and other defining characteristics. The system utilizes a robust backend, an intuitive frontend, and a comprehensive RDF-based ontology that integrates information from various external knowledge sources, enabling users to gain deeper insights into this fascinating domain.</p>
+    
+        <h3>1.1 Objectives of the System</h3>
+        <p>The primary goal of this system is to provide an accessible and dynamic platform for users to explore esoteric languages. The application offers several core features aimed at enhancing user engagement and providing a detailed understanding of the unique qualities of esolangs:</p>
+        <ul>
+            <li><strong>Search and Filtering:</strong> Users can search for esolangs by their name, designer, or year of creation. Advanced filtering options also allow them to sort languages by paradigm (e.g., imperative, functional), computational class (e.g., Turing-complete, finite-state automata), or specific technical features (e.g., stack-based or graph-based languages).</li>
+            <li><strong>Language Details:</strong> Each esoteric language has a dedicated page with comprehensive information, including language features, history, computational properties, and notable examples.</li>
+            <li><strong>Language Similarity:</strong> The system can compute similarities between languages based on semantic embeddings, helping users discover languages that are conceptually related or share common features.</li>
+        </ul>
+    
+        <h3>1.2 Key Components of the System</h3>
+        <p>The architecture of the web application consists of several key components that work together to deliver an efficient, user-friendly experience:</p>
+        <ul>
+            <li><strong>Frontend:</strong> The user interface is designed using HTML, CSS, and JavaScript to ensure a seamless and interactive experience. The frontend provides various interactive elements, such as search bars, filters, and clickable language names, that allow users to navigate and explore language information easily.</li>
+            <li><strong>Backend:</strong> The backend is built using Python and Flask, a lightweight web framework that enables the creation of RESTful APIs for communication between the frontend and the data layer. The backend is responsible for processing user requests, interacting with the RDF-based knowledge model, and serving the requested data to the frontend.</li>
+            <li><strong>RDF Knowledge Model:</strong> The backbone of the application is an RDF-based ontology that represents esolangs, their computational models, paradigms, and technical features. The ontology is populated with data from external knowledge sources like DBpedia and esolang.org and is used for querying and reasoning about languages. The RDF model enables advanced search, filtering, and semantic relationships between languages.</li>
+            <li><strong>External Knowledge Integration:</strong> The system integrates data from DBpedia, esolang.org, and other relevant sources to enrich the knowledge base. This external data is retrieved and added to the RDF ontology to ensure that the application provides up-to-date and comprehensive information about esoteric languages.</li>
+        </ul>
+    
+        <h3>1.3 Technological Approach and Methodology</h3>
+        <p>The development of this system involved several key technical steps:</p>
+        <ul>
+            <li><strong>Data Acquisition:</strong> To populate the RDF ontology with meaningful data, we used a Python-based program to scrape relevant information from esolang.org and DBpedia. This automated process ensures that the knowledge model contains accurate and comprehensive data about esoteric languages, including their properties, designers, and related concepts.</li>
+            <li><strong>Ontology Design:</strong> We leveraged Protegé, a widely-used tool for ontology development, to design the RDF schema and structure the relationships between entities like languages, paradigms, and computational classes. The RDF model is designed to be both expressive and flexible, allowing for complex relationships and queries.</li>
+            <li><strong>RESTful API Design:</strong> The backend exposes a set of RESTful API endpoints that allow the frontend to interact with the knowledge model. The API endpoints enable users to search, filter, and retrieve detailed language data, as well as compute semantic similarities between languages. This API serves as the bridge between the user interface and the RDF knowledge model, enabling a smooth user experience.</li>
+            <li><strong>Semantic Web Technologies:</strong> The RDF model is based on semantic web technologies, leveraging ontologies, SPARQL queries, and linked data principles to ensure that the data is accessible, reusable, and semantically rich. By adopting these technologies, the system can offer advanced querying capabilities and integrate with external datasets like DBpedia, making it easier to enrich and update the knowledge base.</li>
+        </ul>
+    
+        <h3>1.4 Expected Outcomes</h3>
+        <p>By the end of the project, the web application will serve as a comprehensive resource for exploring esoteric programming languages. The following outcomes are expected:</p>
+        <ul>
+            <li><strong>A detailed and dynamic resource of esoteric programming languages:</strong> The system will provide a rich set of metadata for each esolang, including its paradigm, computational class, designer, and unique features.</li>
+            <li><strong>Improved user engagement:</strong> By offering features like search, filtering, and language similarity, the system will facilitate deeper exploration and understanding of esoteric languages.</li>
+            <li><strong>Advanced querying and reasoning:</strong> Through the RDF-based knowledge model and SPARQL queries, the system will enable users to perform advanced searches, uncovering new insights about the relationships between languages.</li>
+        </ul>
+    
+        <h3>1.5 Structure of the Report</h3>
+        <p>This report provides a detailed overview of the design and implementation of the system, structured as follows:</p>
+        <ul>
+            <li><strong>Section 2:</strong> Internal Data Structures and Models – This section describes the data models and structures used within the application, including the RDF-based ontology and its components.</li>
+            <li><strong>Section 3:</strong> Technical Aspects of the API – This section elaborates on the RESTful API design, including the endpoints, methods, and functionalities provided by the API.</li>
+            <li><strong>Section 4:</strong> RDF-based Knowledge Model – This section discusses the expressiveness, real-world usage, and considerations regarding the RDF-based model used in the application, including integration with external knowledge sources.</li>
+            <li><strong>Section 5:</strong> Pragmatic Use of External Data and Linked Data Principles – This section explores how external knowledge sources, such as DBpedia, were integrated and how the system conforms to the linked data principles.</li>
+            <li><strong>Section 6:</strong> User Guide and Case Studies – This section provides practical guidance for using the web application, along with three illustrative case studies showcasing the system’s functionality.</li>
+        </ul>
+    </section>    
+
+    <section id="data-structures">
+        <h2>2. Internal Data Structures/Models</h2>
+        <p>The internal data structures and models are essential to managing and representing data within the application. These structures are primarily based on an RDF ontology that captures complex relationships between different entities in the domain of esoteric programming languages.</p>
+
+        <h3>2.1 Overview of Data Structures</h3>
+        <p>The core data entities in this application are:</p>
+        <ul>
+            <li><strong>Esoteric Languages</strong> - The main object in the system, representing a programming language.</li>
+            <li><strong>Computational Classes</strong> - Categorizing languages by their computational class (e.g., Turing-complete, finite-state automata, etc.).</li>
+            <li><strong>Paradigms</strong> - The programming paradigm(s) that a language follows (e.g., functional, imperative, etc.).</li>
+            <li><strong>Technical Characteristics</strong> - Attributes describing the technical features of each language (e.g., accumulator-based, stack-based, etc.).</li>
+            <li><strong>Usability</strong> - Describes how usable the language is for programming purposes (e.g., educational, unimplemented, etc.).</li>
+        </ul>
+
+        <h3>2.2 RDF Model</h3>
+        <p>The RDF model uses triples (subject-predicate-object) to represent relationships between entities. For instance, a triple could express that "Language X is a functional paradigm language" or "Language Y is Turing-complete."</p>
+        <p><strong>Example Triple:</strong> (<em>Language X</em>, <em>hasParadigm</em>, <em>Functional</em>)</p>
+
+        <h3>2.3 Querying the Data</h3>
+        <p>SPARQL is used to query this RDF data model. A typical query might look for languages belonging to a particular computational class or paradigm.</p>
+        <p><strong>SPARQL Query Example:</strong></p>
+        <pre>
+SELECT ?language
+WHERE {
+    ?language rdf:type dbo:ProgrammingLanguage .
+    ?language dbo:paradigm ?paradigm .
+    ?language dbo:year ?year .
+}
+        </pre>
+    </section>
+
+    <section id="api">
+        <h2>3. Technical Aspects of the Implemented APIs</h2>
+    
+        <h3>3.1 REST API Architecture</h3>
+        <p>The application uses a RESTful API, implemented using the Flask web framework, to provide data access and facilitate communication between the frontend and backend. The API supports various endpoints for interacting with esoteric language data, including searching for languages, retrieving language details, and filtering languages based on multiple attributes such as designer and year of release. The system follows standard REST principles, using appropriate HTTP methods and status codes.</p>
+    
+        <h3>3.2 API Endpoints</h3>
+        <p>The following list provides an overview of the available API endpoints:</p>
+    
+        <h4>1. Homepage</h4>
+        <ul>
+            <li><strong>Endpoint:</strong> /</li>
+            <li><strong>Method:</strong> GET</li>
+            <li><strong>Description:</strong> Renders the homepage of the application, which serves as the entry point for users.</li>
+        </ul>
+    
+        <h4>2. Language Details</h4>
+        <ul>
+            <li><strong>Endpoint:</strong> /languages/<lang_name></li>
+            <li><strong>Method:</strong> GET</li>
+            <li><strong>Description:</strong> Fetches detailed information about a specific esoteric language, identified by the <em>lang_name</em> parameter.</li>
+            <li><strong>Response:</strong> The response includes properties and values of the language along with a list of similar languages.</li>
+        </ul>
+    
+        <h4>3. Search Languages</h4>
+        <ul>
+            <li><strong>Endpoint:</strong> /languages/search</li>
+            <li><strong>Method:</strong> GET</li>
+            <li><strong>Query Parameters:</strong> 
+                <ul>
+                    <li><strong>name</strong>: Search term used to match against language names.</li>
+                    <li><strong>page</strong>: Page number for pagination (default: 1).</li>
+                    <li><strong>limit</strong>: Number of results per page (default: 12).</li>
+                </ul>
+            </li>
+            <li><strong>Description:</strong> Searches for languages based on the provided search term.</li>
+            <li><strong>Response:</strong> A list of languages matching the search term, along with metadata like year of release and designer.</li>
+        </ul>
+    
+        <h4>4. Get Unique Years</h4>
+        <ul>
+            <li><strong>Endpoint:</strong> /languages/years</li>
+            <li><strong>Method:</strong> GET</li>
+            <li><strong>Description:</strong> Fetches a list of unique years when languages were released, helping users filter languages by their year of creation.</li>
+        </ul>
+    
+        <h4>5. Get Unique Designers</h4>
+        <ul>
+            <li><strong>Endpoint:</strong> /languages/designers</li>
+            <li><strong>Method:</strong> GET</li>
+            <li><strong>Description:</strong> Fetches a list of unique designers who created the esoteric languages in the system.</li>
+        </ul>
+    
+        <h4>6. Filtered Language Details</h4>
+        <ul>
+            <li><strong>Endpoint:</strong> /languages/details</li>
+            <li><strong>Method:</strong> GET</li>
+            <li><strong>Query Parameters:</strong> 
+                <ul>
+                    <li><strong>year</strong>: Filter languages by their release year.</li>
+                    <li><strong>designer</strong>: Filter languages by their designer.</li>
+                    <li><strong>page</strong>: Page number for pagination (default: 1).</li>
+                    <li><strong>limit</strong>: Number of results per page (default: 12).</li>
+                </ul>
+            </li>
+            <li><strong>Description:</strong> Fetches filtered language details based on selected year, designer, or both.</li>
+        </ul>
+    
+        <h4>7. Compute Embeddings</h4>
+        <ul>
+            <li><strong>Endpoint:</strong> /compute_embeddings</li>
+            <li><strong>Method:</strong> GET</li>
+            <li><strong>Description:</strong> Computes or loads entity embeddings for the ontology, which are used to perform semantic searches and recommendations.</li>
+            <li><strong>Response:</strong> A message indicating whether the computation or loading of embeddings was successful.</li>
+        </ul>
+    
+        <h4>8. Get Similar Languages</h4>
+        <ul>
+            <li><strong>Endpoint:</strong> /get_similar_languages</li>
+            <li><strong>Method:</strong> POST</li>
+            <li><strong>Request Body:</strong>
+                <pre>
+    {
+      "given_language": "<language_URI>"
+    }
+                </pre>
+            </li>
+            <li><strong>Description:</strong> Fetches languages that are semantically similar to the given language, based on its ontology embedding.</li>
+            <li><strong>Response:</strong> A list of similar languages with similarity scores.</li>
+        </ul>
+    
+        <h3>3.3 API Request/Response Examples</h3>
+        <p>Here are some example requests and responses:</p>
+    
+        <h4>Example 1: Search Languages</h4>
+        <p><strong>Request:</strong> GET /languages/search?name=brainfuck&page=1&limit=10</p>
+        <pre>
+    Response:
+    {
+      "languages": [
+        {"id": 1, "name": "Brainfuck", "paradigm": "Imperative", "year": 1993, "designer": "Urban Müller"},
+        {"id": 2, "name": "Brainfuck Derivative", "paradigm": "Imperative", "year": 1993, "designer": "John Doe"}
+      ]
+    }
+        </pre>
+    
+        <h4>Example 2: Filtered Language Details</h4>
+        <p><strong>Request:</strong> GET /languages/details?year=1993&designer=Urban%20Müller&page=1&limit=10</p>
+        <pre>
+    Response:
+    {
+      "languages": [
+        {"id": 1, "name": "Brainfuck", "paradigm": "Imperative", "year": 1993, "designer": "Urban Müller"},
+        {"id": 3, "name": "Befunge", "paradigm": "Imperative", "year": 1993, "designer": "Urban Müller"}
+      ]
+    }
+        </pre>
+    
+        <h4>Example 3: Get Similar Languages</h4>
+        <p><strong>Request:</strong> POST /get_similar_languages</p>
+        <pre>
+    Request Body:
+    {
+      "given_language": "http://example.org/language/brainfuck"
+    }
+    
+    Response:
+    {
+      "similar_languages": [
+        {"id": 2, "name": "Befunge", "similarity_score": 0.91},
+        {"id": 3, "name": "Piet", "similarity_score": 0.85}
+      ]
+    }
+        </pre>
+    </section>
+    
+
+    <section id="rdf-knowledge-model">
+        <h2>4. Considerations Regarding the RDF-based Knowledge Model</h2>
+    
+        <h3>4.1 Overview of the RDF Knowledge Model</h3>
+        <p>The system is based on an RDF (Resource Description Framework)-based knowledge model that stores information related to esoteric programming languages, their paradigms, computational classes, and other associated features. This knowledge model enables efficient querying, reasoning, and navigation of data, leveraging the expressiveness of RDF and SPARQL for both discovery and analysis purposes.</p>
+    
+        <h3>4.2 Expressiveness of the RDF Model</h3>
+        <p>The RDF model used in this system is designed to be highly expressive, allowing for the representation of complex relationships between various entities such as esoteric languages, their designers, paradigms, computational classes, and technical characteristics. By using a combination of RDF triples and ontologies, the system captures both the semantics and the context of these languages, allowing users to retrieve meaningful data through SPARQL queries.</p>
+        
+        <p>The expressiveness of the RDF-based ontology is evident in the following areas:</p>
+        <ul>
+            <li><strong>Language Relationships:</strong> The RDF model captures the relationships between languages, such as which languages are similar to each other or which ones are derivatives of others. For instance, Brainfuck derivatives can be easily linked through the ontology.</li>
+            <li><strong>Paradigms and Computational Classes:</strong> Languages are categorized by their computational class (e.g., finite-state-automata, turing-complete) and programming paradigms (e.g., functional, imperative). This allows users to filter languages by these attributes and analyze the trends and evolution in the design of esoteric languages.</li>
+            <li><strong>Language Properties and Features:</strong> The model expresses various language properties such as the year of creation, the designer, and unique technical features (e.g., stack-based, graph-based, or accumulator-based computation).</li>
+            <li><strong>Simultaneous Filtering:</strong> The RDF schema facilitates complex queries, such as finding languages that are both designed by a particular designer and belong to a specific computational class or paradigm.</li>
+        </ul>
+    
+        <h3>4.3 Real-World Usage of the RDF Model</h3>
+        <p>The RDF-based knowledge model is not just a theoretical construct but plays a crucial role in enabling the practical functionality of the web application. Below are some real-world examples of how the RDF model is used in the application:</p>
+        
+        <ul>
+            <li><strong>Semantic Search and Filtering:</strong> The system allows users to search for esoteric languages based on specific attributes such as name, designer, paradigm, or computational class. For example, users can search for languages designed in 1993 that are Turing-complete or imperative. This is made possible by the RDF-based representation of the relationships and attributes of languages.</li>
+            <li><strong>Knowledge Integration from External Sources:</strong> The RDF model allows the integration of external knowledge sources, such as DBpedia and Wikidata, which provide additional metadata about the esoteric languages and their designers. This enriches the data stored in the system and enables users to gain more context about a language.</li>
+            <li><strong>SPARQL Queries for Complex Data Retrieval:</strong> The underlying RDF model makes it possible to use SPARQL queries for advanced filtering and analysis. For instance, users can retrieve languages created by a specific designer in a given year, or they can find languages that are similar to a given language using semantic similarity measures. Example queries could be as follows:
+                <pre>
+    SELECT ?language ?name WHERE {
+        ?language rdf:type ex:EsotericLanguage .
+        ?language ex:hasDesigner "Urban Müller" .
+        ?language ex:hasYear "1993" .
+        ?language ex:hasName ?name
+    }
+                </pre>
+            </li>
+            <li><strong>Ontology-based Recommendations:</strong> The RDF model is also used to power the recommendation system for similar languages. By computing and comparing embeddings based on semantic similarity, the system provides suggestions for users exploring related languages. For example, if a user explores "Brainfuck," the system can recommend languages like "Befunge" or "Piet" based on similar computational characteristics or paradigm.</li>
+        </ul>
+    
+        <h3>4.4 Reusability and Flexibility of the Ontology</h3>
+        <p>One of the key benefits of using an RDF-based ontology is the flexibility and reusability it offers. The model is designed to be extensible, allowing for easy incorporation of new data, features, and relationships without major changes to the underlying structure. As the domain of esoteric programming languages evolves, new languages and characteristics can be easily added to the ontology.</p>
+    
+        <p>Moreover, the use of open standards such as RDF and SPARQL ensures that the model is interoperable with other systems and knowledge bases. The ontology can be reused in other contexts beyond the scope of this project, such as in academic research on programming languages or in computational theory studies.</p>
+    
+        <h3>4.5 Advantages of Using RDF in This System</h3>
+        <p>The decision to use RDF as the foundational data model provides several advantages:</p>
+        <ul>
+            <li><strong>Interoperability:</strong> RDF enables the integration of external data sources, such as DBpedia and Wikidata, which helps expand the knowledge base and enrich the user's experience.</li>
+            <li><strong>Flexible Querying:</strong> SPARQL allows for powerful querying capabilities, including filtering, aggregation, and pattern matching, which is crucial for finding relevant information quickly.</li>
+            <li><strong>Scalability:</strong> The RDF model scales well with the increasing volume of data, as the system is designed to efficiently manage the relationships between many entities in a flexible manner.</li>
+            <li><strong>Reasoning:</strong> RDF models can be extended with additional reasoning capabilities, enabling advanced querying and logical inference on the data. For example, if a language is inferred to be similar to another, this can be derived through logical rules in the future.</li>
+        </ul>
+    </section>
+    
+
+    <section id="external-data">
+        <h2>5. Pragmatic Use of External Data Sources</h2>
+        <h3>5.1 External Data Sources</h3>
+        <p>The application integrates external data sources, primarily DBpedia and Esolang, to enhance the knowledge base with authoritative data. This ensures completeness and correctness of the data used.</p>
+        <p>The ontology that the application querries was created by extracting information from these external sources and compiling it according to a structure defined using Protege. Protege enabled us to model various concepts and relationships based on the domain of esoteric programming languages. In Protege, we created several classes to represent different categories and concepts, including:
+            <li>ComputationalClass</li>
+            <li>Paradigm</li>
+            <li>TechnicalCharacteristic</li>
+            <li>Usability</li>
+            <li>SpecificTypeOrFeature</li>
+            <br>
+            Each class was defined with relevant properties and relationships to other classes.</p>
+        <p>To populate the ontology with data, we developed a Python program to automatically retrieve information from Esolang and DBpedia. The program scraped information about various esoteric languages, including their names, descriptions, paradigms, computational classes, and related technical features. The data retrieved was then used to populate the RDF ontology, ensuring that the information was captured in the correct format and linked to the appropriate entities in the ontology.</p>
+
+        <h3>5.2 SPARQL Queries</h3>
+        <p>SPARQL queries are used to retrieve data from the ontology. These queries are executed when getting different REST requests from the frontend, to return the necessary information.</p>
+
+        <h3>5.3 Linked Data Principles</h3>
+        <p>The application adheres to the principles of Linked Data by using dereferenceable URIs for resources, employing RDF for data representation, and integrating with other linked datasets.</p>
+    </section>
+
+    <section id="user-guide">
+        <h2>6. User Guide</h2>
+        <h3>6.1 User Interface Overview</h3>
+        <p>The user interface is simple and intuitive, allowing users to navigate through the list of esoteric languages, filter them by various criteria, and search for specific languages. The user visits the webpage, and the frontend sends a GET request to the backend to fetch all languages. The backend queries the ontology using SPARQL and returns a JSON response. The frontend dynamically renders the list of languages. If the user applies filters (by designer or year) or searches for a language, the frontend sends a request with parameters, then the backend processes the request, queries the ontology, and returns filtered results, and, finally, the frontend updates the displayed list accordingly.</p>
+
+        <h3>6.2 Case Studies</h3>
+        <h4>Case Study 1: Searching for a Specific Language</h4>
+        <p>The user enters a search term (e.g., "Brainfuck") into the search bar and views a detailed description of the language. The search term can refer to a language name, but also a specific property name or value.</p>
+
+        <h4>Case Study 2: Filtering by creation date</h4>
+        <p>The user selects a year from a dropdown to filter the list of languages by the creation date.</p>
+
+        <h4>Case Study 3: Filtering by designer</h4>
+        <p>The user selects a designer from a dropdown to filter the list of languages by their designer.</p>
+
+        <h4>Case Study 4: Comparing two languages</h4>
+        <p>After accessing a language information tab, the user can select another language to view a comparison between the two. Each property of the two languages is put in a table and checked if its matching between the two, or not.</p>
+    </section>
+
+    <section id="conclusion">
+        <h2>7. Conclusion and Future Work</h2>
+        <p>The web application serves as a useful tool for discovering and learning about esoteric programming languages. The use of RDF, SPARQL, and external knowledge bases makes it a powerful and flexible solution. Future work includes expanding the dataset, refining the user interface, and adding more complex querying capabilities.</p>
+        <p>If future expansion is needed, authentication and database integration could be added, as well as implementing caching to avoid redundant queries and improving overall performance by optimizing the SPARQL querries for faster retrieval.</p>
+    </section>
+
+    <section id="references">
+        <h2>8. References</h2>
+        <ul>
+            <li>SPARQL Query Language for RDF - https://www.w3.org/TR/rdf-sparql-query/</li>
+            <li>Esolang - https://esolangs.org/</li>
+            <li>DBpedia - https://www.dbpedia.org/</li>
+            <li>Flask Documentation - https://flask.palletsprojects.com/</li>
+            <li>Protege - https://protege.stanford.edu/</li>
+        </ul>
+    </section>
+
+</body>
+
+</html>
