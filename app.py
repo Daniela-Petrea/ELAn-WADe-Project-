@@ -13,17 +13,16 @@ app = Flask(__name__)
 CORS(app)
 swagger = Swagger(app)
 # openapi documentation at http://localhost:5000/apidocs
-
+# SPARQL_ENDPOINT = "http://localhost:3030/esolang/sparql"
 # Configure AllegroGraph SPARQL endpoint
-# SPARQL_ENDPOINT = "http://172.178.135.123:10035/repositories/elan"
-SPARQL_ENDPOINT = "http://localhost:3030/esolang/sparql"
+SPARQL_ENDPOINT = "http://104.42.227.77:10035/repositories/elan"
 USERNAME = "admin"
-PASSWORD = "b4XsZwmj0x0uE720"
+PASSWORD = "ZASvqUl72zRDtyQu"
 
 
 def execute_sparql(query):
     sparql = SPARQLWrapper(SPARQL_ENDPOINT)
-    # sparql.setCredentials(USERNAME, PASSWORD)
+    sparql.setCredentials(USERNAME, PASSWORD)
     sparql.setQuery(query)
     sparql.setReturnFormat(JSON)
     try:

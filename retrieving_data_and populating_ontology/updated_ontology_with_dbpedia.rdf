@@ -240,7 +240,7 @@
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
         <abstract>A-DU is a thematic esolang currently under development by User:Salpynx based on Linear A balance ledger tablets. 
 It is sort of like Grocery List, with more complex syntax, and fewer operations. 
-A-DU (𐘇𐘬) means something like Assessment in Linear A. Most of the meanings and structure and inspiration for the Linear A aspect of this language comes from the work and resources provided online by John G. Younger. A huge thank you to him, and apologies if he ever reads this! Other sources are listed in the #Bibliography.</abstract>
+A-DU means something like Assessment in Linear A. Most of the meanings and structure and inspiration for the Linear A aspect of this language comes from the work and resources provided online by John G. Younger. A huge thank you to him, and apologies if he ever reads this! Other sources are listed in the #Bibliography.</abstract>
         <releasedYear>2018</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/A-DU</url>
     </owl:NamedIndividual>
@@ -862,7 +862,7 @@ A-DU (𐘇𐘬) means something like Assessment in Linear A. Most of the meaning
     <owl:NamedIndividual rdf:about="http://example.org/ontology/esoteric_languages#ATripleSharp">
         <rdf:type rdf:resource="http://example.org/ontology/esoteric_languages#EsotericLanguage"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
-        <abstract>A𝄪# is A triple sharped(A, bB, B, C), So its syntax is same as C. (I added something in it.)</abstract>
+        <abstract>A Triple Sharp is A triple sharped(A, bB, B, C), So its syntax is same as C. (I added something in it.)</abstract>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/A Triple Sharp</url>
     </owl:NamedIndividual>
     
@@ -875,7 +875,7 @@ A-DU (𐘇𐘬) means something like Assessment in Linear A. Most of the meaning
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#thematic"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>AWA5.0 is a bubble-based esoteric programming language themed after famous Phase Connect vtuber Jelly Hoshiumi. Temp-Tempai, the hardworking and heartbreakingly handsome creator, got inspired after watching her Shenzhen I/O stream. The purpose of the language is to allow Jelly to write programs in her native language (ex. &quot;Awa awawa awawawa awa awa awawawa awawawawawawa....&quot;)</abstract>
+        <abstract>AWA5.0 is a bubble-based esoteric programming language themed after famous Phase Connect vtuber Jelly Hoshiumi. Temp-Tempai, the hardworking and heartbreakingly handsome creator, got inspired after watching her Shenzhen I/O stream. The purpose of the language is to allow Jelly to write programs in her native language (ex. Awa awawa awawawa awa awa awawawa awawawawawawa...;)</abstract>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/AWA5.0</url>
     </owl:NamedIndividual>
     
@@ -1657,7 +1657,7 @@ crossword puzzle.</abstract>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#high-level"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>AnalLang is an esoteric joke programming language made by Unzor. Its interpreter is written in Node.js, and the language itself is the emojis &quot;🍑🍆&quot; repeated in a sequence that translates to JavaScript.</abstract>
+        <abstract>AnalLang is an esoteric joke programming language made by Unzor. Its interpreter is written in Node.js, and the language itself is the emojis repeated in a sequence that translates to JavaScript.</abstract>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/AnalLang</url>
     </owl:NamedIndividual>
     
@@ -1671,7 +1671,7 @@ crossword puzzle.</abstract>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#low-level"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#unimplemented"/>
-        <abstract>Analogia is a syntax developed by User:ais523 in 2019 for describing a minimal/tarpit-like subset of analog computers. (It can thus be seen as a programming language – where the interpreter is either an analog computer, or else a program that simulates one – but analog computers were, of course, not invented by ais523.)</abstract>
+        <abstract>Analogia is a syntax developed by User:ais523 in 2019 for describing a minimal tarpit like subset of analog computers. (It can thus be seen as a programming language where the interpreter is either an analog computer, or else a program that simulates one but analog computers were, of course, not invented by ais523.)</abstract>
         <releasedYear>2019</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Analogia</url>
     </owl:NamedIndividual>
@@ -1686,7 +1686,7 @@ crossword puzzle.</abstract>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#low-level"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>The history of general purpose programmable computers begins with Charles Babbage&apos;s Analytical Engine. In an effort to give modern audiences an experience of what it would have been work like to work with such a machine, John Walker devised the Analytical Engine Programming Cards programming language as an interface to an Analytical Engine emulator. The language was most likely defined in the year 2000, although the concepts obviously date back to 1837 and the inception of the Analytical Engine itself.</abstract>
+        <abstract>The history of general purpose programmable computers begins with Charles Babbageapos Analytical Engine. In an effort to give modern audiences an experience of what it would have been work like to work with such a machine, John Walker devised the Analytical Engine Programming Cards programming language as an interface to an Analytical Engine emulator. The language was most likely defined in the year 2000, although the concepts obviously date back to 1837 and the inception of the Analytical Engine itself.</abstract>
         <releasedYear>2000</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Analytical Engine Programming Cards</url>
     </owl:NamedIndividual>
@@ -10967,7 +10967,7 @@ Electric BitFunk operates on a tape of bits, using instructions borrowed from Bi
         <hasComputationalClass rdf:resource="http://example.org/ontology/esoteric_languages#turing-complete"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>Emoji-gramming (proper name 💻) is a simple emoji-based esolang.</abstract>
+        <abstract>Emoji-gramming is a simple emoji-based esolang.</abstract>
         <releasedYear>2017</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Emoji-gramming</url>
     </owl:NamedIndividual>
@@ -11129,7 +11129,7 @@ It was inspired by the Unefunge language (one-dimensional version of Befunge).</
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#joke-languages"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#unimplemented"/>
-        <abstract>English is a declarative programming language. Many people are familiar with it even if they don&apos;t know any other programming language.</abstract>
+        <abstract>English is a declarative programming language. Many people are familiar with it even if they don't know any other programming language.</abstract>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/English</url>
     </owl:NamedIndividual>
     
@@ -11143,7 +11143,7 @@ It was inspired by the Unefunge language (one-dimensional version of Befunge).</
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#two-dimensional-languages"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>Enigma-2D is the name of a 2D programming language made by User:Alegend, on February 14, 2010. It is a mix of Minimal-2D, and BF. It only has 12 commands:</abstract>
+        <abstract>Enigma-2D is the name of a 2D programming language made by User Alegend, on February 14, 2010. It is a mix of Minimal-2D, and BF. It only has 12 commands </abstract>
         <releasedYear>2010</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Enigma-2D</url>
     </owl:NamedIndividual>
@@ -11159,7 +11159,7 @@ It was inspired by the Unefunge language (one-dimensional version of Befunge).</
         <hasTechnicalCharacteristic rdf:resource="http://example.org/ontology/esoteric_languages#queue-based"/>
         <hasTechnicalCharacteristic rdf:resource="http://example.org/ontology/esoteric_languages#stack-based"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>Eniuq is a stack- and queue-based esoteric programming language in which it is impossible to write nontrivial quines, but flow control is done by the methods normally used for quines.  It was invented by Edward Cree.</abstract>
+        <abstract>Eniuq is a stack and queue based esoteric programming language in which it is impossible to write nontrivial quines, but flow control is done by the methods normally used for quines. It was invented by Edward Cree.</abstract>
         <releasedYear>2012</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Eniuq</url>
     </owl:NamedIndividual>
@@ -11174,7 +11174,7 @@ It was inspired by the Unefunge language (one-dimensional version of Befunge).</
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasTechnicalCharacteristic rdf:resource="http://example.org/ontology/esoteric_languages#stack-based"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>Enjamb is an esoteric programming language where it&apos;s not what&apos;s in your lines that matters — it&apos;s where you break them. It was created in 2019 by User:TartanLlama.</abstract>
+        <abstract>Enjamb is an esoteric programming language where it is not what is in your lines that matters it is where you break them. It was created in 2019 by User:TartanLlama.</abstract>
         <releasedYear>2019</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Enjamb</url>
     </owl:NamedIndividual>
@@ -11187,7 +11187,7 @@ It was inspired by the Unefunge language (one-dimensional version of Befunge).</
         <rdf:type rdf:resource="http://example.org/ontology/esoteric_languages#EsotericLanguage"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#unimplemented"/>
-        <abstract>Enrtopy is an esoteric language created by the User:Esolang1. It was designed to be a version of Entropy where the data doesn&apos;t change. The name is a reference of Truttle1&apos;s youtube video explaining Entropy. (link below). (E1-0003)</abstract>
+        <abstract>Enrtopy is an esoteric language created by the User:Esolang1. It was designed to be a version of Entropy where the data does not change. The name is a reference of Truttle1s youtube video explaining Entropy.</abstract>
         <releasedYear>2022</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Enrtopy</url>
     </owl:NamedIndividual>
@@ -13876,8 +13876,8 @@ Because of the graphical output it is pointless to do mathematical calculations 
         <hasComputationalClass rdf:resource="http://example.org/ontology/esoteric_languages#unknown-computational-class"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>Galveston is an ω-language over the alphabet Σ = {NULL, v1, v2, ...}.
-A program in Galveston is a single ω-word from that language, i.e. a countably infinite sequence made up of symbols from a countably infinite totally-ordered alphabet.</abstract>
+        <abstract>Galveston is an w-language over the alphabet {NULL, v1, v2, ...}.
+A program in Galveston is a single w-word from that language, i.e. a countably infinite sequence made up of symbols from a countably infinite totally-ordered alphabet.</abstract>
         <releasedYear>2021</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Galveston</url>
     </owl:NamedIndividual>
@@ -14045,7 +14045,7 @@ named after the former Ivory Coast President Laurent Gbagbo.</abstract>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasTechnicalCharacteristic rdf:resource="http://example.org/ontology/esoteric_languages#cell-based"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>Genesis 𐤁 is an interpreted, procedural, and Turing-complete diacriticless Paleo-Hebrew programming language.</abstract>
+        <abstract>Genesis is an interpreted, procedural, and Turing-complete diacriticless Paleo-Hebrew programming language.</abstract>
         <releasedYear>2022</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Genesis</url>
     </owl:NamedIndividual>
@@ -14171,7 +14171,7 @@ named after the former Ivory Coast President Laurent Gbagbo.</abstract>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#low-level"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>GibMeRol is a Brainfuck clone that replaces each command in Brainfuck with the letters GibMeRol. It was created for the sole purpose of getting its author, User:Milkman, the &apos;ESOLANG CREATOR&apos; role in User:Truttle1&apos;s discord server. It didn&apos;t work.</abstract>
+        <abstract>GibMeRol is a Brainfuck clone that replaces each command in Brainfuck with the letters GibMeRol. It was created for the sole purpose of getting its author, User:Milkman, the ESOLANG CREATOR role in User:Truttle1 discord server. It did not work.</abstract>
         <releasedYear>2022</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/GibMeRol</url>
     </owl:NamedIndividual>
@@ -14215,7 +14215,7 @@ named after the former Ivory Coast President Laurent Gbagbo.</abstract>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#high-level"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>Glitch is a bytebeat language, used in the Glitch algorithmic synthesizer, for generating music. Its syntax is semi-compatible with other bytebeat languages (through the byte() function). The language internals are floating point numbers, which can be passed through composed functions. Like most bytebeat languages, code consists of an expression that is evaluated every timestep; the input is an unsigned integer representing how many ticks the program has run for, and the output signal is played as a sound (where the number represents the position of a speaker diaphragm). While Glitch offers low-level bitwise operations, it can be considered a high level language (in comparison to its peers), sporting such functions as: sine, conversion of musical notes to Hz frequencies, and random number generation.</abstract>
+        <abstract>Glitch is a bytebeat language, used in the Glitch algorithmic synthesizer, for generating music. Its syntax is semi-compatible with other bytebeat languages (through the byte() function). The language internals are floating point numbers, which can be passed through composed functions. Like most bytebeat languages, code consists of an expression that is evaluated every timestep the input is an unsigned integer representing how many ticks the program has run for, and the output signal is played as a sound (where the number represents the position of a speaker diaphragm). While Glitch offers low-level bitwise operations, it can be considered a high level language (in comparison to its peers), sporting such functions as: sine, conversion of musical notes to Hz frequencies, and random number generation.</abstract>
         <releasedYear>2016</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Glitch</url>
     </owl:NamedIndividual>
@@ -14245,7 +14245,7 @@ named after the former Ivory Coast President Laurent Gbagbo.</abstract>
         <rdf:type rdf:resource="http://example.org/ontology/esoteric_languages#EsotericLanguage"/>
         <hasComputationalClass rdf:resource="http://example.org/ontology/esoteric_languages#turing-complete"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>This page does not contain the documentation, it can be found on the GitHub repository, here.</abstract>
+        <abstract>This page does not contain the documentation.</abstract>
         <releasedYear>2023</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/GoDDS - Graph of Distributed Data Structures</url>
     </owl:NamedIndividual>
@@ -14274,7 +14274,7 @@ named after the former Ivory Coast President Laurent Gbagbo.</abstract>
         <rdf:type rdf:resource="http://example.org/ontology/esoteric_languages#EsotericLanguage"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#thematic"/>
-        <abstract>God Script is a computer language based on religions created by Digerati. The commands are:</abstract>
+        <abstract>God Script is a computer language based on religions created by Digerati.</abstract>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/GodScript</url>
     </owl:NamedIndividual>
     
@@ -21206,7 +21206,7 @@ Minicode executes the code line by line, first compiling it into a certain set o
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#low-level"/>
         <hasTechnicalCharacteristic rdf:resource="http://example.org/ontology/esoteric_languages#stack-based"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>Moaiscript is a stack-based language created by Dtp09 in which the only acceptable characters to use are the Moai Emoji (🗿) and the newline character (\n). Moaiscript was inspired by Chicken and has interpreters written by users Dtp09 and Eiim.</abstract>
+        <abstract>Moaiscript is a stack-based language created by Dtp09 in which the only acceptable characters to use are the Moai Emoji and the newline character (\n). Moaiscript was inspired by Chicken and has interpreters written by users Dtp09 and Eiim.</abstract>
         <releasedYear>2021</releasedYear>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/Moaiscript</url>
     </owl:NamedIndividual>
@@ -31734,7 +31734,7 @@ Also there is an online interpreter available here</abstract>
         <hasSpecificTypeOrFeature rdf:resource="http://example.org/ontology/esoteric_languages#languages"/>
         <hasTechnicalCharacteristic rdf:resource="http://example.org/ontology/esoteric_languages#stack-based"/>
         <hasUsability rdf:resource="http://example.org/ontology/esoteric_languages#implemented"/>
-        <abstract>SussyLang is a stack based esolang for all my bakas 🥵️</abstract>
+        <abstract>SussyLang is a stack based esolang for all my bakas</abstract>
         <url rdf:datatype="http://www.w3.org/2001/XMLSchema#anyURI">https://esolangs.org/wiki/SussyLang</url>
     </owl:NamedIndividual>
     

@@ -5,6 +5,33 @@ This project provides a REST API for exploring and querying details about esoter
 
 ---
 
+## Tags
+
+- project
+- infoiasi
+- wade
+- web
+
+---
+
+## Table of Contents
+
+- [About the Project](#about-the-project)
+- [API Endpoints](#api-endpoints)
+- [Getting Started](#getting-started)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
+
+---
+
+## About the Project
+
+ELAn-WADe-Project is designed to offer a structured way to explore esoteric programming languages, their properties, and relationships using semantic similarity and a knowledge graph.
+
+---
+
 ## **API Endpoints**
 
 ### 1. **Homepage**
@@ -80,6 +107,44 @@ This project provides a REST API for exploring and querying details about esoter
 - **Description:** Fetches languages similar to the given one based on semantic similarity.
 - **Response:** List of similar languages with scores
 
+---
+
+## Getting Started
+
+### Prerequisites
+- Python 3.8+
+- Flask
+- Flask-CORS
+- Flasgger
+- NumPy
+- Requests
+- SPARQLWrapper
+- Scikit-learn
+- SentenceTransformers
+- SPARQL Endpoint Configuration
+
+### Installation
+1. Clone the repo:
+   ```sh
+   git clone https://github.com/yourusername/ELAn-WADe-Project.git
+   ```
+2. Install dependencies:
+   ```sh
+   pip install -r requirements.txt
+   ```
+3. Run the application:
+   ```sh
+   python app.py
+   ```
+
+## Usage
+
+Send API requests using tools like `curl` or Postman, or integrate it into an application.
+
+Example:
+```sh
+curl -X GET http://localhost:5000/languages/Piet
+```
 ---
 
 ## **Coverage Report**
