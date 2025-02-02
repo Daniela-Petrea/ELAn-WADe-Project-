@@ -12,6 +12,7 @@ from flasgger import Swagger, swag_from
 app = Flask(__name__)
 CORS(app)
 swagger = Swagger(app)
+# openapi documentation at http://localhost:5000/apidocs
 
 # Configure AllegroGraph SPARQL endpoint
 # SPARQL_ENDPOINT = "http://172.178.135.123:10035/repositories/elan"
@@ -780,6 +781,84 @@ def compare_languages():
         })
 
     return jsonify({'comparison': comparison})
+
+@app.route("/ontology/<value>")
+@swag_from({
+    "summary": "Retrieve ontology details",
+    "description": "Fetches detailed ontology properties and values for a given esoteric language entity.",
+    "parameters": [
+        {
+            "name": "value",
+            "in": "path",
+            "type": "string",
+            "required": True,
+            "description": "The ontology entity to retrieve details for."
+        }
+    ],
+    "responses": {
+        200: {
+            "description": "Successful response with ontology details.",
+            "content": {
+                "text/html": {
+                    "example": "<html>Ontology details page</html>"
+                }
+            }
+        },
+        404: {
+            "description": "Ontology entity not found.",
+            "content": {
+                "text/html": {
+                    "example": "<html>Not found</html>"
+                }
+            }
+        }
+    }
+})
+def ontology_details(value):
+    query = f"""
+    PREFIX esolang: <http://example.org/ontology/esoteric_languages#>
+    PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+    SELECT DISTINCT ?property ?value WHERE {{
+        esolang:{value} rdf:type ?type .
+        FILTER (?type != esolang:EsotericLanguage)
+        esolang:{value} ?property ?value .
+    }}
+    """
+    results = execute_sparql(query)
+
+    # Check if results exist
+    if not results["results"]["bindings"]:
+        return render_template("ontology_not_found.html", value=value), 404
+
+    # Prepare results
+    detailed_results = []
+    for result in results["results"]["bindings"]:
+        # Process property
+        property_uri = result["property"]["value"]
+        if property_uri.startswith("http://example.org/ontology/esoteric_languages#"):
+            property_suffix = property_uri.split("#")[-1]
+            property_data = {"display": property_suffix, "link": f"/ontology/{property_suffix}"}
+        elif property_uri.startswith("http://www.w3.org/"):
+            property_suffix = property_uri.split("#")[-1]
+            property_data = {"display": property_suffix, "link": property_uri}
+        else:
+            property_data = {"display": property_uri, "link": None}
+
+        # Process value
+        value_uri = result["value"]["value"]
+        if value_uri.startswith("http://example.org/ontology/esoteric_languages#"):
+            value_suffix = value_uri.split("#")[-1]
+            value_data = {"display": value_suffix, "link": f"/ontology/{value_suffix}"}
+        elif value_uri.startswith("http://www.w3.org/"):
+            value_suffix = value_uri.split("#")[-1]
+            value_data = {"display": value_suffix, "link": value_uri}
+        else:
+            value_data = {"display": value_uri, "link": None}
+
+        detailed_results.append({"property": property_data, "value": value_data})
+
+    return render_template("ontology.html", results=detailed_results, value=value)
+
 
 
 if __name__ == '__main__':

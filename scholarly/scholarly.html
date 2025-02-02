@@ -317,23 +317,35 @@ WHERE {
 
         <h3>6.2 Case Studies</h3>
         <h4>Case Study 1: Searching for a Specific Language</h4>
-        <p>The user enters a search term (e.g., "Brainfuck") into the search bar and views a detailed description of the language. The search term can refer to a language name, but also a specific property name or value.</p>
+        <p>The user enters a search term (e.g., "turing") into the search bar and views a list of languages containig it in their name.</p>
+        <img src="./img/search.PNG" alt="Searching for languages containg 'turing'" width="50%" height="auto">
 
         <h4>Case Study 2: Filtering by creation date</h4>
         <p>The user selects a year from a dropdown to filter the list of languages by the creation date.</p>
+        <img src="./img/year_filter.PNG" alt="Searching for languages released in year 1998" width="50%" height="auto">
 
         <h4>Case Study 3: Filtering by designer</h4>
         <p>The user selects a designer from a dropdown to filter the list of languages by their designer.</p>
+        <img src="./img/both_filters.PNG" alt="Searching for languages released in year 1998 by Ben Olmstead" width="50%" height="auto">
 
         <h4>Case Study 4: Comparing two languages</h4>
         <p>After accessing a language information tab, the user can select another language to view a comparison between the two. Each property of the two languages is put in a table and checked if its matching between the two, or not.</p>
+        <img src="./img/comparison.PNG" alt="Comparing languages 'Brainfuck+' and 'Brainfuck--'" width="50%" height="auto">
+
+        <h4>Video demonstration:</h4>
     </section>
 
     <section id="conclusion">
         <h2>7. Conclusion and Future Work</h2>
-        <p>The web application serves as a useful tool for discovering and learning about esoteric programming languages. The use of RDF, SPARQL, and external knowledge bases makes it a powerful and flexible solution. Future work includes expanding the dataset, refining the user interface, and adding more complex querying capabilities.</p>
-        <p>If future expansion is needed, authentication and database integration could be added, as well as implementing caching to avoid redundant queries and improving overall performance by optimizing the SPARQL querries for faster retrieval.</p>
+        <p>The web application serves as a valuable tool for discovering and learning about esoteric programming languages. By leveraging a structured RDF-based knowledge model, SPARQL queries, and external knowledge bases such as DBpedia and Esolang Wiki, the system provides a semantically rich and flexible platform for exploring unconventional programming paradigms. The adoption of a RESTful API ensures smooth data retrieval and interaction between the frontend and backend, while the integration of Apache Jena Fuseki enables efficient RDF storage and querying.</p>
+    
+        <p>One of the key strengths of the system is its extensibility, allowing for future improvements in several dimensions. Enhancements to the dataset can be made by incorporating additional knowledge bases and community contributions, ensuring broader coverage of esoteric languages and their properties. Furthermore, refining the user interface to improve accessibility and user experience can make the platform more engaging, especially for educators and programming enthusiasts.</p>
+    
+        <p>To further optimize performance, future work should focus on caching mechanisms to reduce redundant queries and improve response times. Implementing database integration could allow for persistent storage of user interactions, analytics, and additional metadata, facilitating more personalized recommendations and improved search functionality. Authentication mechanisms could also be introduced if user-specific features, such as saving favorite languages or contributing new data, are planned for future releases.</p>
+    
+        <p>Beyond these improvements, incorporating advanced natural language processing (NLP) techniques and machine learning models could enhance semantic similarity computations, making language recommendations more precise. Additionally, integrating interactive tutorials or code execution environments for selected esoteric languages could turn the application into a more hands-on educational tool.</p>
     </section>
+    
 
     <section id="references">
         <h2>8. References</h2>

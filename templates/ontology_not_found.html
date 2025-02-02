@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" prefix="esolang: http://example.org/ontology/esoteric_languages#">
+<head>
+    <meta charset="UTF-8">
+    <title>Ontology Not Found</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/language_not_found.css') }}">
+</head>
+<body vocab="http://example.org/ontology/esoteric_languages#" typeof="owl:Thing">
+    <h1 property="rdfs:label">Error 404: Ontology Entry Not Found</h1>
+    
+    <p>
+        The ontology resource <strong property="rdfs:label">{{ value }}</strong> does not exist or is not valid.
+    </p>
+    
+    <a href="/" property="rdfs:seeAlso">Return to Home</a>
+</body>
+</html>
