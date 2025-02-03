@@ -24,7 +24,6 @@ This project provides a REST API for exploring and querying details about esoter
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
-- 
 ---
 
 ## About the Project
