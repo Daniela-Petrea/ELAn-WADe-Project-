@@ -525,7 +525,7 @@ def language_details_specific_language(lang_name):
 
 def get_sparql_results():
     sparql = SPARQLWrapper(SPARQL_ENDPOINT)
-    # sparql.setCredentials(USERNAME, PASSWORD)
+    sparql.setCredentials(USERNAME, PASSWORD)
     sparql.setQuery("""
         SELECT ?s ?p ?o WHERE {
             ?s ?p ?o.
@@ -861,4 +861,4 @@ def ontology_details(value):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run()

@@ -74,3 +74,71 @@ def test_escape_special_characters():
     input_name = "name#value"
     escaped = escape_special_characters(input_name)
     assert escaped == "name\\#value"
+
+
+def test_compare_languages():
+    tester = app.test_client()
+    response = tester.post('/compare_languages', json={
+        'given_language': '0815',
+        'similar_language': '123'
+    })
+
+    assert response.status_code == 200
+    data = response.get_json()
+    assert 'comparison' in data
+    assert isinstance(data['comparison'], list)
+    assert len(data['comparison']) > 0
+
+
+
+def test_get_similar_languages_missing_param(client):
+    response = client.post('/get_similar_languages', json={})
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert 'error' in data
+
+# Test invalid language format in /get_similar_languages
+
+def test_get_similar_languages_invalid(client):
+    payload = {"given_language": "InvalidLanguageName"}
+    response = client.post('/get_similar_languages', json=payload)
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert 'error' in data
+
+# Test /compare_languages with missing data
+
+def test_compare_languages_missing_params(client):
+    response = client.post('/compare_languages', json={'given_language': 'Lisp'})
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert 'error' in data
+
+# Test /compare_languages with non-existent languages
+def test_compute_embeddings_no_embeddings(client, monkeypatch):
+    def mock_load_embeddings():
+        return None  # Simulate missing embeddings
+
+    monkeypatch.setattr("app.load_entity_embeddings", mock_load_embeddings)
+    response = client.get('/compute_embeddings')
+    assert response.status_code == 200
+    data = json.loads(response.data)
+    assert 'message' in data
+
+# Test edge case: search with no results
+
+def test_search_languages_no_results(client):
+    response = client.get('/languages/search?name=NoSuchLanguage&page=1&limit=5')
+    assert response.status_code == 200
+    data = json.loads(response.data)
+    assert 'data' in data
+    assert isinstance(data['data'], list)
+    assert len(data['data']) == 0  # Expecting no results
+
+# Test special character escaping
+
+def test_escape_special_characters():
+    from app import escape_special_characters
+    input_name = "name#value+test/path"
+    escaped = escape_special_characters(input_name)
+    assert escaped == "name\\#value\\+test\\/path"

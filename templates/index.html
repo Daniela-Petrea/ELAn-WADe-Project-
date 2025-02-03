@@ -35,8 +35,8 @@
         {% for language in languages %}
         <div typeof="ListItem" vocab="http://schema.org/" property="itemListElement">
             <h2 typeof="Thing">
-                <a href="{{ url_for('language_details', lang_name=language) }}" 
-                   property="name" 
+                <a href="{{ url_for('language_details', lang_name=language) }}"
+                   property="name"
                    resource="http://example.org/ontology/esoteric_languages#{{ language }}">
                     {{ language }}
                 </a>
