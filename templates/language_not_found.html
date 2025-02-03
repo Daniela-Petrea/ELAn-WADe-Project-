@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" prefix="schema: http://schema.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Not Found</title>
+    <link rel="icon" href="{{ url_for('static', filename='resources/favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/language_not_found.css') }}">
+</head>
+<body vocab="http://schema.org/" typeof="WebPage">
+    
+    <div class="container" typeof="ErrorPage">
+        <h1 property="name">Error 404: Language Not Found</h1>
+        <p property="description">
+            The language <strong property="schema:identifier">{{ lang_name }}</strong> does not exist 
+            or is not classified as an Esoteric Language.
+        </p>
+        <a href="/" class="back-button" property="schema:relatedLink">Return to Home</a>
+    </div>
+    <script src="{{ url_for('static', filename='js/language_not_found.js') }}"></script>
+
+</body>
+</html>

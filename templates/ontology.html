@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" prefix="esolang: http://example.org/ontology/esoteric_languages#">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ value }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/language.css') }}">
+</head>
+<body vocab="http://example.org/ontology/esoteric_languages#" typeof="esolang:EsotericLanguage">
+    <div class="header-container">
+        <h1 property="rdfs:label">Ontology Details for <span property="rdfs:label">{{ value }}</span></h1>
+    </div>
+    
+    <button id="back-button" onclick="goBack()">Back</button>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for result in results %}
+            <tr>
+                <td property="esolang:{{ result['property']['display'] }}">
+                    {% if result["property"]["link"] %}
+                        <a href="{{ result['property']['link'] }}" property="rdfs:seeAlso">{{ result['property']['display'] }}</a>
+                    {% else %}
+                        <span property="rdfs:label">{{ result["property"]["display"] }}</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if result["value"]["link"] %}
+                        <a href="{{ result['value']['link'] }}" property="rdfs:seeAlso">{{ result['value']['display'] }}</a>
+                    {% else %}
+                        <span property="rdfs:label">{{ result["value"]["display"] }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/4c6278ef-3efe-4499-a9d7-51b51cb7dcb9/resourceGroups/elan/providers/Microsoft.Web/sites/vmelan/subscriptions/4c6278ef-3efe-4499-a9d7-51b51cb7dcb9/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/elan-project",
+    "appService.deploySubpath": "."
+}

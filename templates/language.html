@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" prefix="schema: http://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ lang_name }}</title>
+    <link rel="icon" href="/static/resources/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/static/css/language.css">
+</head>
+<body>
+    <div class="header-container">
+        <h1>{{ lang_name }}</h1>
+    </div>
+    <span id="language-name" style="display: none;">{{ lang_name }}</span>
+
+    <button id="back-button">Back to Home</button>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+<tbody>
+    {% if results %}
+        {% for result in results %}
+            <tr>
+                <td>
+                    {% if result["property"]["link"] %}
+                        <a href="{{ result['property']['link'] }}">{{ result['property']['display'] }}</a>
+                    {% else %}
+                        {{ result["property"]["display"] }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if result["value"]["link"] %}
+                        <a href="{{ result['value']['link'] }}">{{ result['value']['display'] }}</a>
+                    {% else %}
+                        {{ result["value"]["display"] }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="2">No data available</td>
+        </tr>
+    {% endif %}
+</tbody>
+
+        </table>
+    </div>
+
+    <!-- Carousel section -->
+    <section id="similar-languages">
+        <h2>Similar Languages</h2>
+        <div class="carousel">
+            <button id="prev-btn" class="arrow" aria-label="Previous">&#9664;</button>
+            <div id="cards-container" class="cards-container"></div>
+            <button id="next-btn" class="arrow" aria-label="Next">&#9654;</button>
+        </div>
+    </section>
+<!-- Popup Modal for Comparison -->
+<div id="popup-modal" class="popup-modal">
+    <div class="popup-content">
+        <button id="close-popup" class="close-popup">X</button>
+        <h2>Comparison Table</h2>
+        <table id="popup-comparison-table" class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Property</th>
+                    <th id="popup-header-lang1">Given Language</th>
+                    <th id="popup-header-lang2">Similar Language</th>
+                    <th class="similarity">Similarity</th> <!-- Add class here -->
+                </tr>
+            </thead>
+            <tbody id="popup-comparison-table-body"></tbody>
+        </table>
+    </div>
+</div>
+
+    <script>
+        window.similarLanguages = {{ similar_languages | tojson | safe }};
+    </script>
+
+    <script src="{{ url_for('static', filename='js/language.js') }}"></script>
+</body>
+</html>

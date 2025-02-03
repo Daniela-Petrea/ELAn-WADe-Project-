@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" prefix="schema: http://schema.org/ rdfs: http://www.w3.org/2000/01/rdf-schema#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esoteric Programming Languages</title>
+    <link rel="icon" href="{{ url_for('static', filename='resources/favicon.ico') }}" type="image/x-icon" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+<body vocab="http://schema.org/" typeof="CollectionPage">
+
+    <h1 property="name">Esoteric Programming Languages</h1>
+
+    <!-- Filter Container -->
+    <div id="filter-container">
+        <label for="year-filter">Filter by Year:</label>
+        <select id="year-filter" onchange="fetchLanguages(1)" property="schema:dateCreated">
+            <option value="">All</option>
+        </select>
+
+        <label for="designer-filter">Filter by Designer:</label>
+        <select id="designer-filter" onchange="fetchLanguages(1)" property="schema:creator">
+            <option value="">All</option>
+        </select>
+    </div>
+
+    <!-- Search Input -->
+    <div id="search-container">
+        <input type="text" id="search-input" placeholder="Search by Language Name">
+        <button onclick="fetchSearchResults(1)">Search</button>
+    </div>
+
+    <!-- Cards Container -->
+    <div id="cards-container" typeof="ItemList">
+        {% for language in languages %}
+        <div typeof="ListItem" vocab="http://schema.org/" property="itemListElement">
+            <h2 typeof="Thing">
+                <a href="{{ url_for('language_details', lang_name=language) }}"
+                   property="name"
+                   resource="http://example.org/ontology/esoteric_languages#{{ language }}">
+                    {{ language }}
+                </a>
+            </h2>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-controls">
+        <button id="prevBtn" onclick="changePage(-1)">Previous</button>
+        <span id="pageNumber">Page: 1</span>
+        <button id="nextBtn" onclick="changePage(1)">Next</button>
+    </div>
+
+    <!-- Link to external JavaScript -->
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+
+</body>
+</html>
