@@ -483,6 +483,7 @@ def language_details_specific_language(lang_name):
       ?releasedYear
       ?designer
       (GROUP_CONCAT(DISTINCT STRAFTER(STR(?computationalClass), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?computationalClasses)
+      (GROUP_CONCAT(DISTINCT STRAFTER(STR(?specificTypeOrFeature), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?specificTypeOrFeature)
       (GROUP_CONCAT(DISTINCT STRAFTER(STR(?paradigm), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?paradigms)
       (GROUP_CONCAT(DISTINCT STRAFTER(STR(?usability), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?usabilities)
       (GROUP_CONCAT(DISTINCT STRAFTER(STR(?technicalCharacteristic), "http://example.org/ontology/esoteric_languages#"); separator=", ") AS ?technicalCharacteristics)
@@ -496,6 +497,7 @@ def language_details_specific_language(lang_name):
       OPTIONAL {{ ?language esolang:hasComputationalClass ?computationalClass . }}
       OPTIONAL {{ ?language esolang:hasParadigm ?paradigm . }}
       OPTIONAL {{ ?language esolang:hasUsability ?usability . }}
+      OPTIONAL {{ ?language esolang:hasSpecificTypeOrFeature ?specificTypeOrFeature . }}
       OPTIONAL {{ ?language esolang:hasTechnicalCharacteristic ?technicalCharacteristic . }}
     }}
     GROUP BY ?language ?releasedYear ?designer
@@ -517,6 +519,7 @@ def language_details_specific_language(lang_name):
             "paradigms": result.get("paradigms", {}).get("value", "").split(", "),
             "usabilities": result.get("usabilities", {}).get("value", "").split(", "),
             "technicalCharacteristics": result.get("technicalCharacteristics", {}).get("value", "").split(", "),
+            "specificTypeOrFeature":result.get("specificTypeOrFeature",{}).get("value", "").split(", ")
         })
 
     response = {"data": response_data}
@@ -760,7 +763,7 @@ def compare_languages():
     # Extract key details for comparison
     properties = [
         'releasedYear', 'designer', 'computationalClasses', 'paradigms',
-        'usabilities', 'technicalCharacteristics'
+        'usabilities', 'technicalCharacteristics','specificTypeOrFeature'
     ]
     comparison = []
     for prop in properties:
